@@ -57,6 +57,102 @@
             margin: 0 10px;
         }
 
+        .search-section {
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .search-title {
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex: 1;
+            max-width: 400px;
+            padding: 15px 20px;
+            font-size: 1.05em;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            background: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        #searchInput:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-container button {
+            padding: 15px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .search-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .search-result.success {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            color: #2d5016;
+        }
+
+        .search-result.error {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #8e5b00;
+        }
+
+        .search-result.info {
+            background: linear-gradient(135deg, #a8edea 0%, #74b9ff 100%);
+            color: #0c4a6e;
+        }
+
+        .participant.highlight {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
+        }
+
         .schedule-section {
             max-width: 900px;
             margin: 50px auto 40px;
@@ -236,6 +332,26 @@
             .header .subtitle {
                 font-size: 1em;
             }
+            .search-section {
+                padding: 25px 20px;
+                margin: 30px 20px;
+            }
+            .search-title {
+                font-size: 1.3em;
+            }
+            .search-container {
+                flex-direction: column;
+                width: 100%;
+            }
+            #searchInput {
+                width: 100%;
+                max-width: none;
+                font-size: 1em;
+            }
+            .search-container button {
+                width: 100%;
+                padding: 12px 20px;
+            }
             .courses-grid {
                 grid-template-columns: 1fr;
             }
@@ -301,6 +417,17 @@
             </div>
         </div>
 
+        <!-- 이름 검색 섹션 -->
+        <div class="search-section">
+            <div class="search-title">🔍 내 이름 찾기</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="전체 이름 입력 (예: 김테크)" />
+                <button onclick="searchName()">검색</button>
+                <button onclick="clearSearch()">초기화</button>
+            </div>
+            <div id="searchResult" class="search-result"></div>
+        </div>
+
         <div class="courses-grid">
             <!-- 클라우드네이티브 -->
             <div class="course-card">
@@ -309,12 +436,12 @@
                     <div class="course-count">6명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*진(03)</div>
-                    <div class="participant">김*준(93)</div>
-                    <div class="participant">류*재(19)</div>
-                    <div class="participant">이*이(36)</div>
-                    <div class="participant">정*혜(22)</div>
-                    <div class="participant">정*우(57)</div>
+                    <div class="participant" data-fullname="김범진">김*진(03)</div>
+                    <div class="participant" data-fullname="김혁준">김*준(93)</div>
+                    <div class="participant" data-fullname="류명재">류*재(19)</div>
+                    <div class="participant" data-fullname="이원이">이*이(36)</div>
+                    <div class="participant" data-fullname="정지혜">정*혜(22)</div>
+                    <div class="participant" data-fullname="정현우">정*우(57)</div>
                 </div>
             </div>
 
@@ -325,20 +452,20 @@
                     <div class="course-count">14명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*찬(68)</div>
-                    <div class="participant">남*은(04)</div>
-                    <div class="participant">손*경(41)</div>
-                    <div class="participant">양*희(91)</div>
-                    <div class="participant">양*요(36)</div>
-                    <div class="participant">이*석(55)</div>
-                    <div class="participant">정*영(93)</div>
-                    <div class="participant">정*한(32)</div>
-                    <div class="participant">김*현(27)</div>
-                    <div class="participant">김*일(55)</div>
-                    <div class="participant">손*전(55)</div>
-                    <div class="participant">이*현(03)</div>
-                    <div class="participant">이*영(67)</div>
-                    <div class="participant">조*연(86)</div>
+                    <div class="participant" data-fullname="김기찬">김*찬(68)</div>
+                    <div class="participant" data-fullname="남경은">남*은(04)</div>
+                    <div class="participant" data-fullname="손무경">손*경(41)</div>
+                    <div class="participant" data-fullname="양승희">양*희(91)</div>
+                    <div class="participant" data-fullname="양정요">양*요(36)</div>
+                    <div class="participant" data-fullname="이동석">이*석(55)</div>
+                    <div class="participant" data-fullname="정문영">정*영(93)</div>
+                    <div class="participant" data-fullname="정종한">정*한(32)</div>
+                    <div class="participant" data-fullname="김도현">김*현(27)</div>
+                    <div class="participant" data-fullname="김예일">김*일(55)</div>
+                    <div class="participant" data-fullname="손성전">손*전(55)</div>
+                    <div class="participant" data-fullname="이세현">이*현(03)</div>
+                    <div class="participant" data-fullname="이신영">이*영(67)</div>
+                    <div class="participant" data-fullname="조수연">조*연(86)</div>
                 </div>
             </div>
 
@@ -349,14 +476,14 @@
                     <div class="course-count">8명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">배*온(51)</div>
-                    <div class="participant">윤*영(86)</div>
-                    <div class="participant">정*웅(11)</div>
-                    <div class="participant">주*웅(03)</div>
-                    <div class="participant">한*정(01)</div>
-                    <div class="participant">권*호(00)</div>
-                    <div class="participant">김*윤(48)</div>
-                    <div class="participant">민*준(17)</div>
+                    <div class="participant" data-fullname="배새온">배*온(51)</div>
+                    <div class="participant" data-fullname="윤찬영">윤*영(86)</div>
+                    <div class="participant" data-fullname="정지웅">정*웅(11)</div>
+                    <div class="participant" data-fullname="주현웅">주*웅(03)</div>
+                    <div class="participant" data-fullname="한혜정">한*정(01)</div>
+                    <div class="participant" data-fullname="권대호">권*호(00)</div>
+                    <div class="participant" data-fullname="김기윤">김*윤(48)</div>
+                    <div class="participant" data-fullname="민정준">민*준(17)</div>
                 </div>
             </div>
 
@@ -367,13 +494,13 @@
                     <div class="course-count">7명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*현(64)</div>
-                    <div class="participant">남*진(10)</div>
-                    <div class="participant">최*수(09)</div>
-                    <div class="participant">한*우(08)</div>
-                    <div class="participant">황*연(69)</div>
-                    <div class="participant">유*기(48)</div>
-                    <div class="participant">최*웅(82)</div>
+                    <div class="participant" data-fullname="김세현">김*현(64)</div>
+                    <div class="participant" data-fullname="남경진">남*진(10)</div>
+                    <div class="participant" data-fullname="최우수">최*수(09)</div>
+                    <div class="participant" data-fullname="한성우">한*우(08)</div>
+                    <div class="participant" data-fullname="황시연">황*연(69)</div>
+                    <div class="participant" data-fullname="유민기">유*기(48)</div>
+                    <div class="participant" data-fullname="최태웅">최*웅(82)</div>
                 </div>
             </div>
 
@@ -384,22 +511,22 @@
                     <div class="course-count">16명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*욱(82)</div>
-                    <div class="participant">석*원(33)</div>
-                    <div class="participant">신*주(39)</div>
-                    <div class="participant">이*주(45)</div>
-                    <div class="participant">이*일(27)</div>
-                    <div class="participant">정*욱(71)</div>
-                    <div class="participant">최*재(41)</div>
-                    <div class="participant">김*희(26)</div>
-                    <div class="participant">김*현(82)</div>
-                    <div class="participant">안*서(34)</div>
-                    <div class="participant">윤*원(66)</div>
-                    <div class="participant">이*우(84)</div>
-                    <div class="participant">정*우(41)</div>
-                    <div class="participant">김*현(66)</div>
-                    <div class="participant">황*하(30)</div>
-                    <div class="participant">김*지(15)</div>
+                    <div class="participant" data-fullname="김용욱">김*욱(82)</div>
+                    <div class="participant" data-fullname="석대원">석*원(33)</div>
+                    <div class="participant" data-fullname="신유주">신*주(39)</div>
+                    <div class="participant" data-fullname="이영주">이*주(45)</div>
+                    <div class="participant" data-fullname="이재일">이*일(27)</div>
+                    <div class="participant" data-fullname="정민욱">정*욱(71)</div>
+                    <div class="participant" data-fullname="최민재">최*재(41)</div>
+                    <div class="participant" data-fullname="김나희">김*희(26)</div>
+                    <div class="participant" data-fullname="김대현">김*현(82)</div>
+                    <div class="participant" data-fullname="안지서">안*서(34)</div>
+                    <div class="participant" data-fullname="윤서원">윤*원(66)</div>
+                    <div class="participant" data-fullname="이택우">이*우(84)</div>
+                    <div class="participant" data-fullname="정완우">정*우(41)</div>
+                    <div class="participant" data-fullname="김태현">김*현(66)</div>
+                    <div class="participant" data-fullname="황준하">황*하(30)</div>
+                    <div class="participant" data-fullname="김민지">김*지(15)</div>
                 </div>
             </div>
 
@@ -410,23 +537,23 @@
                     <div class="course-count">17명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*교(93)</div>
-                    <div class="participant">박*윤(34)</div>
-                    <div class="participant">변*성(82)</div>
-                    <div class="participant">송*윤(33)</div>
-                    <div class="participant">양*빈(92)</div>
-                    <div class="participant">이*(95)</div>
-                    <div class="participant">장*현(77)</div>
-                    <div class="participant">최*욱(58)</div>
-                    <div class="participant">홍*주(51)</div>
-                    <div class="participant">황*혜(27)</div>
-                    <div class="participant">안*현(36)</div>
-                    <div class="participant">이*은(23)</div>
-                    <div class="participant">이*신(77)</div>
-                    <div class="participant">임*혁(37)</div>
-                    <div class="participant">조*진(05)</div>
-                    <div class="participant">최*선(79)</div>
-                    <div class="participant">최*훈(12)</div>
+                    <div class="participant" data-fullname="김윤교">김*교(93)</div>
+                    <div class="participant" data-fullname="박재윤">박*윤(34)</div>
+                    <div class="participant" data-fullname="변준성">변*성(82)</div>
+                    <div class="participant" data-fullname="송자윤">송*윤(33)</div>
+                    <div class="participant" data-fullname="양은빈">양*빈(92)</div>
+                    <div class="participant" data-fullname="이준">이*(95)</div>
+                    <div class="participant" data-fullname="장지현">장*현(77)</div>
+                    <div class="participant" data-fullname="최창욱">최*욱(58)</div>
+                    <div class="participant" data-fullname="홍성주">홍*주(51)</div>
+                    <div class="participant" data-fullname="황영혜">황*혜(27)</div>
+                    <div class="participant" data-fullname="안재현">안*현(36)</div>
+                    <div class="participant" data-fullname="이가은">이*은(23)</div>
+                    <div class="participant" data-fullname="이경신">이*신(77)</div>
+                    <div class="participant" data-fullname="임종혁">임*혁(37)</div>
+                    <div class="participant" data-fullname="조수진">조*진(05)</div>
+                    <div class="participant" data-fullname="최민선">최*선(79)</div>
+                    <div class="participant" data-fullname="최동훈">최*훈(12)</div>
                 </div>
             </div>
 
@@ -437,16 +564,16 @@
                     <div class="course-count">10명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">강*연(64)</div>
-                    <div class="participant">김*영(68)</div>
-                    <div class="participant">김*중(37)</div>
-                    <div class="participant">김*현(94)</div>
-                    <div class="participant">배*진(17)</div>
-                    <div class="participant">옥*빈(11)</div>
-                    <div class="participant">이*은(72)</div>
-                    <div class="participant">이*찬(88)</div>
-                    <div class="participant">이*수(06)</div>
-                    <div class="participant">최*혁(86)</div>
+                    <div class="participant" data-fullname="강두연">강*연(64)</div>
+                    <div class="participant" data-fullname="김근영">김*영(68)</div>
+                    <div class="participant" data-fullname="김민중">김*중(37)</div>
+                    <div class="participant" data-fullname="김수현">김*현(94)</div>
+                    <div class="participant" data-fullname="배예진">배*진(17)</div>
+                    <div class="participant" data-fullname="옥예빈">옥*빈(11)</div>
+                    <div class="participant" data-fullname="이남은">이*은(72)</div>
+                    <div class="participant" data-fullname="이원찬">이*찬(88)</div>
+                    <div class="participant" data-fullname="이현수">이*수(06)</div>
+                    <div class="participant" data-fullname="최광혁">최*혁(86)</div>
                 </div>
             </div>
 
@@ -457,10 +584,10 @@
                     <div class="course-count">4명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*현(20)</div>
-                    <div class="participant">강*지(26)</div>
-                    <div class="participant">이*림(35)</div>
-                    <div class="participant">임*경(96)</div>
+                    <div class="participant" data-fullname="김제현">김*현(20)</div>
+                    <div class="participant" data-fullname="강민지">강*지(26)</div>
+                    <div class="participant" data-fullname="이예림">이*림(35)</div>
+                    <div class="participant" data-fullname="임가경">임*경(96)</div>
                 </div>
             </div>
 
@@ -471,18 +598,18 @@
                     <div class="course-count">12명</div>
                 </div>
                 <div class="participants-list">
-                    <div class="participant">김*영(58)</div>
-                    <div class="participant">김*늘(82)</div>
-                    <div class="participant">이*초(09)</div>
-                    <div class="participant">이*진(90)</div>
-                    <div class="participant">정*나(67)</div>
-                    <div class="participant">황*빈(72)</div>
-                    <div class="participant">김*희(40)</div>
-                    <div class="participant">박*미(42)</div>
-                    <div class="participant">박*영(34)</div>
-                    <div class="participant">신*준(40)</div>
-                    <div class="participant">윤*빈(84)</div>
-                    <div class="participant">홍*원(50)</div>
+                    <div class="participant" data-fullname="김나영">김*영(58)</div>
+                    <div class="participant" data-fullname="김하늘">김*늘(82)</div>
+                    <div class="participant" data-fullname="이은초">이*초(09)</div>
+                    <div class="participant" data-fullname="이재진">이*진(90)</div>
+                    <div class="participant" data-fullname="정지나">정*나(67)</div>
+                    <div class="participant" data-fullname="황성빈">황*빈(72)</div>
+                    <div class="participant" data-fullname="김현희">김*희(40)</div>
+                    <div class="participant" data-fullname="박보미">박*미(42)</div>
+                    <div class="participant" data-fullname="박세영">박*영(34)</div>
+                    <div class="participant" data-fullname="신연준">신*준(40)</div>
+                    <div class="participant" data-fullname="윤정빈">윤*빈(84)</div>
+                    <div class="participant" data-fullname="홍지원">홍*원(50)</div>
                 </div>
             </div>
         </div>
@@ -498,5 +625,84 @@
             </p>
         </div>
     </div>
+
+    <script>
+        // Enter 키로 검색 가능하게
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchName();
+            }
+        });
+
+        function searchName() {
+            const searchText = document.getElementById('searchInput').value.trim();
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (!searchText) {
+                resultDiv.className = 'search-result error';
+                resultDiv.textContent = '⚠️ 이름을 입력해주세요!';
+                return;
+            }
+
+            // 이전 하이라이트 제거
+            clearSearch(false);
+
+            // 모든 참가자 요소 가져오기
+            const participants = document.querySelectorAll('.participant');
+            const matchedElements = [];
+            const matchedCourses = [];
+
+            participants.forEach(participant => {
+                const fullName = participant.getAttribute('data-fullname');
+                
+                // 전체 이름으로 정확히 매칭
+                if (fullName === searchText) {
+                    participant.classList.add('highlight');
+                    matchedElements.push(participant);
+                    
+                    // 해당 과정명 찾기
+                    const courseCard = participant.closest('.course-card');
+                    const courseName = courseCard.querySelector('.course-title').textContent.trim();
+                    matchedCourses.push(courseName);
+                }
+            });
+
+            if (matchedElements.length > 0) {
+                // 첫 번째 검색 결과로 스크롤
+                matchedElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                if (matchedElements.length === 1) {
+                    // 동명이인 없음
+                    resultDiv.className = 'search-result success';
+                    resultDiv.textContent = `✅ "${searchText}"님을 찾았습니다! (${matchedCourses[0]})`;
+                } else {
+                    // 동명이인 있음
+                    resultDiv.className = 'search-result info';
+                    resultDiv.innerHTML = `⚠️ 동명이인이 ${matchedElements.length}명 있습니다!<br>과정: ${matchedCourses.join(', ')}`;
+                }
+            } else {
+                resultDiv.className = 'search-result error';
+                resultDiv.innerHTML = `❌ "${searchText}"님을 찾을 수 없습니다.<br><small>전체 이름을 정확히 입력해주세요 (예: 김테크)</small>`;
+            }
+        }
+
+        function clearSearch(clearInput = true) {
+            // 모든 하이라이트 제거
+            const highlighted = document.querySelectorAll('.participant.highlight');
+            highlighted.forEach(participant => {
+                participant.classList.remove('highlight');
+            });
+            
+            // 검색 결과 메시지 제거
+            const resultDiv = document.getElementById('searchResult');
+            resultDiv.className = 'search-result';
+            resultDiv.textContent = '';
+            
+            // 검색창 비우기
+            if (clearInput) {
+                document.getElementById('searchInput').value = '';
+            }
+        }
+    </script>
 </body>
 </html>
