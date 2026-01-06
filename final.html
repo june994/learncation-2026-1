@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✈️ kt cloud TECH UP 런케이션 최종 명단 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 25%, #ADD8E6 50%, #B0E0E6 75%, #87CEEB 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .header .emoji {
+            font-size: 2.5em;
+            margin: 0 10px;
+        }
+
+        .round-section {
+            margin-bottom: 50px;
+        }
+
+        .round-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px 25px 0 0;
+            padding: 30px 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-bottom: none;
+        }
+
+        .round-title {
+            font-size: 2em;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .round-date {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .round-count {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .round-total {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-top: 10px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 0 0 25px 25px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-top: none;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #f0f0f0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .course-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .course-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .course-count {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+        }
+
+        .participants-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .participant {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #2d3748;
+            transition: all 0.2s ease;
+        }
+
+        .participant:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .participant-name {
+            font-size: 1em;
+        }
+
+        .participant-airport {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95em;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .airport-icon {
+            font-size: 1.2em;
+        }
+
+        .airport-김포 { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); }
+        .airport-부산 { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); }
+        .airport-청주 { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); }
+        .airport-대구 { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); }
+        .airport-광주 { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); }
+        .airport-여수 { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .header .subtitle {
+                font-size: 1em;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .round-header {
+                padding: 20px;
+            }
+            .round-title {
+                font-size: 1.5em;
+            }
+            .round-total {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✈️ kt cloud TECH UP ✈️</h1>
+            <div class="subtitle">제주 런케이션 2026 · 최종 명단</div>
+            <div class="emoji">🏝️ 🌊 ✈️ 🎒 🗿</div>
+        </div>
+
+        <!-- 1회차 -->
+        <div class="round-section">
+            <div class="round-header">
+                <div class="round-title">🍊 1회차</div>
+                <div class="round-date">2026. 01. 25(일) ~ 01. 31(토)</div>
+                <div class="round-count">클라우드네이티브(5) · 백엔드(6) · 풀스택(6)</div>
+                <div class="round-total">참여 인원: 17명</div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">☁️ 클라우드네이티브</div>
+                        <div class="course-count">5명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*진(03)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-부산">
+                            <span class="participant-name">김*준(93)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">류*재(19)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-청주">
+                            <span class="participant-name">이*이(36)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*혜(22)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">💻 백엔드</div>
+                        <div class="course-count">6명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">남*은(04)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">양*요(36)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*현(03)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-청주">
+                            <span class="participant-name">이*영(67)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*영(93)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-광주">
+                            <span class="participant-name">조*연(86)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>광주</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">🎯 풀스택</div>
+                        <div class="course-count">6명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-청주">
+                            <span class="participant-name">김*현(64)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">남*진(10)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">유*기(48)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">최*수(09)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">최*웅(82)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">황*연(69)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2회차 -->
+        <div class="round-section">
+            <div class="round-header">
+                <div class="round-title">🌸 2회차</div>
+                <div class="round-date">2026. 02. 01(일) ~ 02. 07(토)</div>
+                <div class="round-count">사이버보안(11) · 프로덕트매니지먼트(3) · 프로덕트디자인(7)</div>
+                <div class="round-total">참여 인원: 21명</div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">🔒 사이버보안</div>
+                        <div class="course-count">11명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*현(82)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*욱(82)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">석*원(34)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">신*주(39)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">윤*원(66)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*주(45)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*우(84)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*욱(71)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*우(41)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-대구">
+                            <span class="participant-name">최*재(41)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>대구</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">황*하(30)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">📊 프로덕트매니지먼트</div>
+                        <div class="course-count">3명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">강*지(26)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*현(20)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-부산">
+                            <span class="participant-name">임*경(96)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">✨ 프로덕트디자인</div>
+                        <div class="course-count">7명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*영(58)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*늘(82)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">박*영(34)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*초(09)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*진(90)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">윤*빈(84)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">홍*원(50)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3회차 -->
+        <div class="round-section">
+            <div class="round-header">
+                <div class="round-title">❄️ 3회차</div>
+                <div class="round-date">2026. 02. 22(일) ~ 02. 28(토)</div>
+                <div class="round-count">클라우드인프라(6) · 생성형AI(8) · 프론트엔드(6) · 클라우드네이티브(1)</div>
+                <div class="round-total">참여 인원: 21명</div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">🔧 클라우드인프라</div>
+                        <div class="course-count">6명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">배*온(51)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*웅(11)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">주*웅(03)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">권*호(00)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*윤(48)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">민*준(17)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">🤖 생성형AI</div>
+                        <div class="course-count">8명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">변*성(82)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-여수">
+                            <span class="participant-name">송*윤(33)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>여수</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">양*빈(92)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*(95)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-부산">
+                            <span class="participant-name">장*현(77)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
+                        </div>
+                        <div class="participant airport-광주">
+                            <span class="participant-name">조*진(05)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>광주</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">최*선(79)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">최*욱(58)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">🎨 프론트엔드</div>
+                        <div class="course-count">6명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*영(68)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">김*현(94)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">옥*빈(11)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">이*은(72)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">최*혁(86)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                        <div class="participant airport-김포">
+                            <span class="participant-name">강*연(64)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">☁️ 클라우드네이티브</div>
+                        <div class="course-count">1명</div>
+                    </div>
+                    <div class="participants-list">
+                        <div class="participant airport-김포">
+                            <span class="participant-name">정*우(57)</span>
+                            <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p style="font-size: 2em; margin-top: 40px;">
+                ✈️ 제주에서 만나요! ✈️
+            </p>
+            <p style="font-size: 1.3em; margin-top: 20px; font-weight: 600;">
+                출발 전 출발/도착 항공 확인 필수! 🎒
+            </p>
+        </div>
+    </div>
+</body>
+</html>
