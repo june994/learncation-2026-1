@@ -57,6 +57,102 @@
             margin: 0 10px;
         }
 
+        .search-section {
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .search-title {
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex: 1;
+            max-width: 400px;
+            padding: 15px 20px;
+            font-size: 1.05em;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            background: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        #searchInput:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-container button {
+            padding: 15px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .search-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .search-result.success {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            color: #2d5016;
+        }
+
+        .search-result.error {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #8e5b00;
+        }
+
+        .search-result.info {
+            background: linear-gradient(135deg, #a8edea 0%, #74b9ff 100%);
+            color: #0c4a6e;
+        }
+
+        .participant.highlight {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
+        }
+
         .round-section {
             margin-bottom: 50px;
         }
@@ -213,6 +309,26 @@
             .header .subtitle {
                 font-size: 1em;
             }
+            .search-section {
+                padding: 25px 20px;
+                margin: 30px 20px;
+            }
+            .search-title {
+                font-size: 1.3em;
+            }
+            .search-container {
+                flex-direction: column;
+                width: 100%;
+            }
+            #searchInput {
+                width: 100%;
+                max-width: none;
+                font-size: 1em;
+            }
+            .search-container button {
+                width: 100%;
+                padding: 12px 20px;
+            }
             .courses-grid {
                 grid-template-columns: 1fr;
                 padding: 20px;
@@ -237,6 +353,17 @@
             <div class="emoji">🏝️ 🌊 ✈️ 🎒 🗿</div>
         </div>
 
+        <!-- 이름 검색 섹션 -->
+        <div class="search-section">
+            <div class="search-title">🔍 내 이름 찾기</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="전체 이름 입력 (예: 김테크)" />
+                <button onclick="searchName()">검색</button>
+                <button onclick="clearSearch()">초기화</button>
+            </div>
+            <div id="searchResult" class="search-result"></div>
+        </div>
+
         <!-- 1회차 -->
         <div class="round-section">
             <div class="round-header">
@@ -252,23 +379,23 @@
                         <div class="course-count">5명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김범진">
                             <span class="participant-name">김*진(03)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-부산">
+                        <div class="participant airport-부산" data-fullname="김혁준">
                             <span class="participant-name">김*준(93)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="류명재">
                             <span class="participant-name">류*재(19)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-청주">
+                        <div class="participant airport-청주" data-fullname="이원이">
                             <span class="participant-name">이*이(36)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정지혜">
                             <span class="participant-name">정*혜(22)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -281,27 +408,27 @@
                         <div class="course-count">6명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="남경은">
                             <span class="participant-name">남*은(04)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="양정요">
                             <span class="participant-name">양*요(36)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이세현">
                             <span class="participant-name">이*현(03)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-청주">
+                        <div class="participant airport-청주" data-fullname="이신영">
                             <span class="participant-name">이*영(67)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정문영">
                             <span class="participant-name">정*영(93)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-광주">
+                        <div class="participant airport-광주" data-fullname="조수연">
                             <span class="participant-name">조*연(86)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>광주</span>
                         </div>
@@ -314,27 +441,27 @@
                         <div class="course-count">6명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-청주">
+                        <div class="participant airport-청주" data-fullname="김세현">
                             <span class="participant-name">김*현(64)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>청주</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="남경진">
                             <span class="participant-name">남*진(10)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="유민기">
                             <span class="participant-name">유*기(48)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="최우수">
                             <span class="participant-name">최*수(09)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="최태웅">
                             <span class="participant-name">최*웅(82)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="황시연">
                             <span class="participant-name">황*연(69)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -358,47 +485,47 @@
                         <div class="course-count">11명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김대현">
                             <span class="participant-name">김*현(82)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김용욱">
                             <span class="participant-name">김*욱(82)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="석대원">
                             <span class="participant-name">석*원(34)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="신유주">
                             <span class="participant-name">신*주(39)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="윤서원">
                             <span class="participant-name">윤*원(66)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이영주">
                             <span class="participant-name">이*주(45)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이택우">
                             <span class="participant-name">이*우(84)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정민욱">
                             <span class="participant-name">정*욱(71)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정완우">
                             <span class="participant-name">정*우(41)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-대구">
+                        <div class="participant airport-대구" data-fullname="최민재">
                             <span class="participant-name">최*재(41)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>대구</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="황준하">
                             <span class="participant-name">황*하(30)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -411,15 +538,15 @@
                         <div class="course-count">3명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="강민지">
                             <span class="participant-name">강*지(26)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김제현">
                             <span class="participant-name">김*현(20)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-부산">
+                        <div class="participant airport-부산" data-fullname="임가경">
                             <span class="participant-name">임*경(96)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
                         </div>
@@ -432,31 +559,31 @@
                         <div class="course-count">7명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김나영">
                             <span class="participant-name">김*영(58)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김하늘">
                             <span class="participant-name">김*늘(82)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="박세영">
                             <span class="participant-name">박*영(34)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이은초">
                             <span class="participant-name">이*초(09)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이재진">
                             <span class="participant-name">이*진(90)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="윤정빈">
                             <span class="participant-name">윤*빈(84)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="홍지원">
                             <span class="participant-name">홍*원(50)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -480,27 +607,27 @@
                         <div class="course-count">6명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="배새온">
                             <span class="participant-name">배*온(51)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정지웅">
                             <span class="participant-name">정*웅(11)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="주현웅">
                             <span class="participant-name">주*웅(03)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="권대호">
                             <span class="participant-name">권*호(00)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김기윤">
                             <span class="participant-name">김*윤(48)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="민정준">
                             <span class="participant-name">민*준(17)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -513,35 +640,35 @@
                         <div class="course-count">8명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="변준성">
                             <span class="participant-name">변*성(82)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-여수">
+                        <div class="participant airport-여수" data-fullname="송자윤">
                             <span class="participant-name">송*윤(33)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>여수</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="양은빈">
                             <span class="participant-name">양*빈(92)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이준">
                             <span class="participant-name">이*(95)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-부산">
+                        <div class="participant airport-부산" data-fullname="장지현">
                             <span class="participant-name">장*현(77)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>부산</span>
                         </div>
-                        <div class="participant airport-광주">
+                        <div class="participant airport-광주" data-fullname="조수진">
                             <span class="participant-name">조*진(05)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>광주</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="최민선">
                             <span class="participant-name">최*선(79)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="최창욱">
                             <span class="participant-name">최*욱(58)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -554,27 +681,27 @@
                         <div class="course-count">6명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김근영">
                             <span class="participant-name">김*영(68)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="김수현">
                             <span class="participant-name">김*현(94)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="옥예빈">
                             <span class="participant-name">옥*빈(11)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="이남은">
                             <span class="participant-name">이*은(72)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="최광혁">
                             <span class="participant-name">최*혁(86)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="강두연">
                             <span class="participant-name">강*연(64)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -587,7 +714,7 @@
                         <div class="course-count">1명</div>
                     </div>
                     <div class="participants-list">
-                        <div class="participant airport-김포">
+                        <div class="participant airport-김포" data-fullname="정현우">
                             <span class="participant-name">정*우(57)</span>
                             <span class="participant-airport"><span class="airport-icon">✈️</span>김포</span>
                         </div>
@@ -605,5 +732,94 @@
             </p>
         </div>
     </div>
+
+    <script>
+        // Enter 키로 검색 가능하게
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchName();
+            }
+        });
+
+        function searchName() {
+            const searchText = document.getElementById('searchInput').value.trim();
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (!searchText) {
+                resultDiv.className = 'search-result error';
+                resultDiv.textContent = '⚠️ 이름을 입력해주세요!';
+                return;
+            }
+
+            // 이전 하이라이트 제거
+            clearSearch(false);
+
+            // 모든 참가자 요소 가져오기
+            const participants = document.querySelectorAll('.participant');
+            const matchedElements = [];
+            const matchedInfo = [];
+
+            participants.forEach(participant => {
+                const fullName = participant.getAttribute('data-fullname');
+                
+                // 전체 이름으로 정확히 매칭
+                if (fullName === searchText) {
+                    participant.classList.add('highlight');
+                    matchedElements.push(participant);
+                    
+                    // 해당 과정명과 회차 찾기
+                    const courseCard = participant.closest('.course-card');
+                    const courseName = courseCard.querySelector('.course-title').textContent.trim();
+                    const roundSection = participant.closest('.round-section');
+                    const roundTitle = roundSection.querySelector('.round-title').textContent.trim();
+                    const airport = participant.querySelector('.participant-airport').textContent.trim().replace('✈️', '').trim();
+                    
+                    matchedInfo.push({
+                        round: roundTitle,
+                        course: courseName,
+                        airport: airport
+                    });
+                }
+            });
+
+            if (matchedElements.length > 0) {
+                // 첫 번째 검색 결과로 스크롤
+                matchedElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                if (matchedElements.length === 1) {
+                    // 동명이인 없음
+                    const info = matchedInfo[0];
+                    resultDiv.className = 'search-result success';
+                    resultDiv.innerHTML = `✅ "${searchText}"님을 찾았습니다!<br>${info.round} · ${info.course} · 출발/도착: ${info.airport}`;
+                } else {
+                    // 동명이인 있음
+                    const infoText = matchedInfo.map(info => `${info.round} (${info.course})`).join(', ');
+                    resultDiv.className = 'search-result info';
+                    resultDiv.innerHTML = `⚠️ 동명이인이 ${matchedElements.length}명 있습니다!<br>${infoText}`;
+                }
+            } else {
+                resultDiv.className = 'search-result error';
+                resultDiv.innerHTML = `❌ "${searchText}"님을 찾을 수 없습니다.<br><small>전체 이름을 정확히 입력해주세요 (예: 김테크)</small>`;
+            }
+        }
+
+        function clearSearch(clearInput = true) {
+            // 모든 하이라이트 제거
+            const highlighted = document.querySelectorAll('.participant.highlight');
+            highlighted.forEach(participant => {
+                participant.classList.remove('highlight');
+            });
+            
+            // 검색 결과 메시지 제거
+            const resultDiv = document.getElementById('searchResult');
+            resultDiv.className = 'search-result';
+            resultDiv.textContent = '';
+            
+            // 검색창 비우기
+            if (clearInput) {
+                document.getElementById('searchInput').value = '';
+            }
+        }
+    </script>
 </body>
 </html>
